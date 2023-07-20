@@ -1,9 +1,16 @@
-def dfs(graph, start_node, visited=None):
-    if visited is None:
-        visited = set()
-    visited.add(start_node)
-    print(start_node)   # Process the node (in this case, just printing)
+def dfs(graph, start_node):
+    visited = set()
+    stack = [start_node]
+    traversal_order = []
 
-    for neighbor in graph[start_node]:
-        if neighbor not in visited:
-            dfs(graph, neighbor, visited)
+    while stack:
+        current_node = stack.pop()
+        if current_node not in visited:
+            traversal_order.append(current_node)
+            visited.add(current_node)
+
+            for neighbor in graph[current_node]:
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+    return traversal_order
